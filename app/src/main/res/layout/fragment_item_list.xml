@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_slide_notify_view"
+    android:elevation="10dp"
+    android:layout_gravity="right"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:id="@+id/left_pane"
+        android:layout_width="48dp"
+        android:clickable="true"
+        android:layout_height="match_parent"
+        android:paddingLeft="4dp"
+        android:background="@drawable/ripple_for_side_notify"
+        android:focusable="true">
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow_left" />
+    </FrameLayout>
+
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.example.myapplication.ItemFragment"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ItemFragment"
+        tools:listitem="@layout/fragment_item" />
+
+</LinearLayout>
