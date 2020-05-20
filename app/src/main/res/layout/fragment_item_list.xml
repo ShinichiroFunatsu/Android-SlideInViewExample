@@ -40,6 +40,8 @@
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
         tools:context=".NotificationItemFragment"
-        tools:listitem="@layout/fragment_item" />
+        tools:listitem="@layout/fragment_item"
+        tools:itemCount="4"
+        />
 
 </LinearLayout>
