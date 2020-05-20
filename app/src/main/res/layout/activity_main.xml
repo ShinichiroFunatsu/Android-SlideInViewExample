@@ -24,7 +24,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list_container"
-        android:name="com.example.myapplication.ItemFragment"
+        android:name="com.example.myapplication.NotificationItemFragment"
         android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

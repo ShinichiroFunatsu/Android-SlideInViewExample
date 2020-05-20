@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +10,8 @@ import com.example.myapplication.animation.RightSlideInOutAnimation
 import com.example.myapplication.dummy.DummyContent
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
-class NotificationItemFragment : Fragment() {
+// FIXME apply data-binding
+class NotificationItemFragment : Fragment(R.layout.fragment_item_list) {
 
     enum class State {
         EXPAND, COLLAPSE,
@@ -21,24 +20,20 @@ class NotificationItemFragment : Fragment() {
     private val animation = RightSlideInOutAnimation()
     private var currentState: State = State.COLLAPSE
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+        view.doOnNextLayout {
+            initViewPositionAndAnimation(view)
+        }
+    }
+
+    private fun initView(view: View) {
         with(view.list) {
             layoutManager = LinearLayoutManager(context)
             adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
         }
         view.arrow.setImageResource(R.drawable.ic_arrow_left)
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.doOnNextLayout {
-            initViewAndAnimation(view)
-        }
         view.left_pane.setOnClickListener {
             when (currentState) {
                 State.COLLAPSE -> {
@@ -57,7 +52,7 @@ class NotificationItemFragment : Fragment() {
         }
     }
 
-    private fun initViewAndAnimation(view: View) {
+    private fun initViewPositionAndAnimation(view: View) {
         hidRightSidePaneWithNoAnimation(view)
         val rightSidePaneWidth = view.findViewById<RecyclerView>(R.id.list).width
         animation.initAnimationParam(rightSidePaneWidth, view)

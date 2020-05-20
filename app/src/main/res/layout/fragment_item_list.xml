@@ -35,7 +35,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:name="com.example.myapplication.ItemFragment"
+        android:name="com.example.myapplication.NotificationItemFragment"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
