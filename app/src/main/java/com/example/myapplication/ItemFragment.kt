@@ -14,6 +14,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.dummy.DummyContent
 import com.google.android.material.animation.AnimationUtils
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
@@ -66,19 +67,14 @@ class ItemFragment : Fragment() {
 
     // TODO refactor as initialize function
     private fun hideRightSideNoAnimation(view: View) {
-        val params = (view as ViewGroup).layoutParams
-        val leftPadding = view.marginLeft
-        val width = params.width + leftPadding
-        val leftSidePane = view.findViewById<FrameLayout>(R.id.left_pane)
-        val leftSidePaneWidth = (leftSidePane as ViewGroup).layoutParams.width
+        val rightSidePaneWidth = view.findViewById<RecyclerView>(R.id.list).width
         view.layout(
-            view.left + width - leftSidePaneWidth,
+            view.left + rightSidePaneWidth,
             view.top,
-            view.right + width - leftSidePaneWidth,
+            view.right + rightSidePaneWidth,
             view.bottom
         )
-        val slideWidth = view.width - leftSidePaneWidth
-        animation.initAnimationParam(slideWidth, view)
+        animation.initAnimationParam(rightSidePaneWidth, view)
     }
 
 }
