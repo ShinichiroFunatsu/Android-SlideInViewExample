@@ -27,16 +27,12 @@ class NotificationItemViewModel() : ViewModel() {
         get() = _show
 
     private var currentState: State by Delegates.observable(State.COLLAPSE) { _: KProperty<*>, oldState: State, newState: State ->
-        when (newState) {
-            State.EXPAND -> {
-                if (oldState == State.COLLAPSE) {
-                    _expand.value = Unit
-                }
+        when(oldState to newState) {
+            (State.COLLAPSE to State.EXPAND) -> {
+                _expand.value = Unit
             }
-            State.COLLAPSE -> {
-                if (oldState == State.EXPAND) {
-                    _collapse.value = Unit
-                }
+            (State.EXPAND to State.COLLAPSE) -> {
+                _collapse.value = Unit
             }
         }
     }
