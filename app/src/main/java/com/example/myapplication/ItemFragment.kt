@@ -8,7 +8,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.animation.SlideInAnimation
+import com.example.myapplication.animation.RightSlideInOutAnimation
 import com.example.myapplication.dummy.DummyContent
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
@@ -18,7 +18,7 @@ class ItemFragment : Fragment() {
         EXPAND, COLLAPSE,
     }
 
-    private val animation = SlideInAnimation()
+    private val animation = RightSlideInOutAnimation()
     private var currentState: State = State.COLLAPSE
 
     override fun onCreateView(

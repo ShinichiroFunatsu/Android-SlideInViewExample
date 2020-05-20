@@ -8,7 +8,7 @@ import android.view.ViewPropertyAnimator
 import com.google.android.material.animation.AnimationUtils
 import kotlin.properties.Delegates
 
-class SlideInAnimation() {
+class RightSlideInOutAnimation() {
 
     private var width by Delegates.notNull<Int>()
     private var currentAnimator: ViewPropertyAnimator? = null
