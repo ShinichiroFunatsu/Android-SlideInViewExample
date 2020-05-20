@@ -25,7 +25,8 @@ class ItemFragment : Fragment() {
         EXPAND, COLLAPSE,
     }
 
-    var currentState: State = State.COLLAPSE
+    private val animation = SlideInAnimation()
+    private var currentState: State = State.COLLAPSE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +50,13 @@ class ItemFragment : Fragment() {
             when (currentState) {
                 State.COLLAPSE -> {
                     currentState = State.EXPAND
-                    slideIn {
+                    animation.slideIn {
                         view.arrow.setImageResource(R.drawable.ic_arrow_right)
                     }
                 }
                 State.EXPAND -> {
                     currentState = State.COLLAPSE
-                    slideOut {
+                    animation.slideOut {
                         view.arrow.setImageResource(R.drawable.ic_arrow_left)
                     }
                 }
@@ -63,6 +64,7 @@ class ItemFragment : Fragment() {
         }
     }
 
+    // TODO refactor as initialize function
     private fun hideRightSideNoAnimation(view: View) {
         val params = (view as ViewGroup).layoutParams
         val leftPadding = view.marginLeft
@@ -76,20 +78,23 @@ class ItemFragment : Fragment() {
             view.bottom
         )
         val slideWidth = view.width - leftSidePaneWidth
-        initAnimationParam(slideWidth, view)
+        animation.initAnimationParam(slideWidth, view)
     }
 
+}
+
+class SlideInAnimation() {
 
     private var width by Delegates.notNull<Int>()
     private var currentAnimator: ViewPropertyAnimator? = null
     private lateinit var _child: View
 
-    private fun initAnimationParam(width: Int, child: View) {
+    fun initAnimationParam(width: Int, child: View) {
         this.width = width
         this._child = child
     }
 
-    private fun slideIn(onAnimationStart: () -> Unit) {
+    fun slideIn(onAnimationStart: () -> Unit) {
         if (currentAnimator != null) {
             currentAnimator!!.cancel()
             _child.clearAnimation()
@@ -104,7 +109,7 @@ class ItemFragment : Fragment() {
         )
     }
 
-    private fun slideOut(onAnimationStart: () -> Unit) {
+    fun slideOut(onAnimationStart: () -> Unit) {
         if (currentAnimator != null) {
             currentAnimator!!.cancel()
             _child.clearAnimation()
@@ -147,4 +152,5 @@ class ItemFragment : Fragment() {
         private const val ENTER_ANIMATION_DURATION = 260
         private const val EXIT_ANIMATION_DURATION = 275
     }
+
 }
