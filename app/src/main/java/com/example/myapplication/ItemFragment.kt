@@ -45,7 +45,7 @@ class ItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.doOnNextLayout {
-            hideRightSideNoAnimation(view)
+            initViewAndAnimation(view)
         }
         view.left_pane.setOnClickListener {
             when (currentState) {
@@ -65,8 +65,13 @@ class ItemFragment : Fragment() {
         }
     }
 
-    // TODO refactor as initialize function
-    private fun hideRightSideNoAnimation(view: View) {
+    private fun initViewAndAnimation(view: View) {
+        hidRightSidePaneWithNoAnimation(view)
+        val rightSidePaneWidth = view.findViewById<RecyclerView>(R.id.list).width
+        animation.initAnimationParam(rightSidePaneWidth, view)
+    }
+
+    private fun hidRightSidePaneWithNoAnimation(view: View) {
         val rightSidePaneWidth = view.findViewById<RecyclerView>(R.id.list).width
         view.layout(
             view.left + rightSidePaneWidth,
@@ -74,7 +79,6 @@ class ItemFragment : Fragment() {
             view.right + rightSidePaneWidth,
             view.bottom
         )
-        animation.initAnimationParam(rightSidePaneWidth, view)
     }
 
 }
