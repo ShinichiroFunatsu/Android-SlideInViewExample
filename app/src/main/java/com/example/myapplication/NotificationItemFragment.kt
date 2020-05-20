@@ -12,7 +12,7 @@ import com.example.myapplication.animation.RightSlideInOutAnimation
 import com.example.myapplication.dummy.DummyContent
 import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
-class ItemFragment : Fragment() {
+class NotificationItemFragment : Fragment() {
 
     enum class State {
         EXPAND, COLLAPSE,
