@@ -76,8 +76,8 @@ class RightSlideInOutAnimation() {
 
     companion object {
         private const val ENTER_START_DELAY = 120
-        private const val ENTER_ANIMATION_DURATION = 260
-        private const val EXIT_ANIMATION_DURATION = 275
+        private const val ENTER_ANIMATION_DURATION = 200
+        private const val EXIT_ANIMATION_DURATION = 180
     }
 
 }
